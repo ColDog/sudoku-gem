@@ -47,7 +47,8 @@ module SudokuBuilder
       @sud.each do |k,v|
         c = [] ; r = [] ; g = []
         build_crg(k,c,r,g,@sud)
-        if check?(v[0], c,r,g)              # runs the check method used before on every value.
+        v.class == Array ? val = v[0] : val = v
+        if check?(val, c,r,g)              # runs the check method used before on every value.
           valid << false
         else
           valid << true
