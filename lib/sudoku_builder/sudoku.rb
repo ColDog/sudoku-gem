@@ -1,4 +1,4 @@
-module Sudoku
+module SudokuBuilder
   class Sudoku
 
     # this method builds the 'c,r,g' arguments which are used as local variables within

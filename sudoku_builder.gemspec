@@ -5,7 +5,7 @@ require 'sudoku/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "sudoku"
-  spec.version       = Sudoku::VERSION
+  spec.version       = SudokuBuilder::VERSION
   spec.authors       = ["Colin Walker"]
   spec.email         = ["cjwalker@sfu.ca"]
 

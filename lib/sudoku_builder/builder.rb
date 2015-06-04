@@ -1,7 +1,7 @@
 require File.expand_path(File.join(File.dirname(__FILE__), 'sudoku'))
 
-module Sudoku
-  class Builder < Sudoku
+module SudokuBuilder
+  class Builder < SudokuBuilder
     def initialize(sudoku)
       @sud = sudoku
     end
