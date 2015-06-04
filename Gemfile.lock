@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sudoku (0.1.0)
+    sudoku_builder (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -14,4 +14,4 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.9)
   rake (~> 10.0)
-  sudoku!
+  sudoku_builder!
