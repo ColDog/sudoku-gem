@@ -2,7 +2,6 @@ require File.expand_path(File.join(File.dirname(__FILE__), 'sudoku'))
 
 module Sudoku
   class Builder < Sudoku
-
     def initialize(sudoku)
       @sud = sudoku
     end
@@ -27,7 +26,7 @@ module Sudoku
       valid = []
       @sud.each do |k,v|
         c = [] ; r = [] ; g = []
-        build_crg(k, c,r,g)
+        build_crg(k,c,r,g,@sud)
         if check?(v[0], c,r,g)              # runs the check method used before on every value.
           valid << false
         else

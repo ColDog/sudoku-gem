@@ -12,6 +12,6 @@ module Sudoku
       sudoku[q] = []
       q += 1
     end
-    Builder.new(sudoku)
+    Solver.new(sudoku).solve
   end
 end
