@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SudokuBuilder do
-  let(:sudoku_builder) { SudokuBuilder.new }
+  let(:sudoku) { SudokuBuilder.new }
 
   it 'has a version number' do
     expect(SudokuBuilder::VERSION).not_to be nil
