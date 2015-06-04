@@ -1,15 +1,21 @@
 # Sudoku
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/sudoku`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to `SudokuBuilder`. Build and fill out sudoku's with the same tool!
 
-TODO: Delete this and the text above, and describe your gem
+### Quick Start
+`> require 'sudoku_builder'`
+
+Run the following in the console:
+`> SudokuBuilder.new.pretty_print`
+
+
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'sudoku'
+gem 'sudoku_builder'
 ```
 
 And then execute:
@@ -18,18 +24,18 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install sudoku
+    $ gem install sudoku_builder
 
 ## Usage
 
 To create a new puzzle:
 
-`Sudoku.new`
+`SudokuBuilder.new`
 
-This will return a `Sudoku::Builder` object that looks like this:
+This will return a `SudokuBuilder::Builder` object that looks like this:
 
 	```ruby
-	#<Sudoku::Builder:0x007fdc729373e8 @sud={0=>[6], 1=>[8], 2=>[9], 3=>[5], 4=>[7], 5=>[2], 6=>[3], ...
+	#<SudokuBuilder::Builder:0x007fdc729373e8 @sud={0=>[6], 1=>[8], 2=>[9], 3=>[5], 4=>[7], 5=>[2], 6=>[3], ...
 	```
 
 On the builder object you can call a handful of different methods:
@@ -42,7 +48,7 @@ On the builder object you can call a handful of different methods:
 
 To solve an existing puzzle, call:
 
-	`Sudoku::Solver.new(my_puzzle)`
+	`SudokuBuilder::Solver.new(my_puzzle).solve`
 
 my_puzzle must be equal to a hash with keys from 0 to 80 and values equal to an integer for already given squares, and an array for empty squares. ie:
 
