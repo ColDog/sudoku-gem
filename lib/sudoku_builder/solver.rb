@@ -4,9 +4,8 @@ require File.expand_path(File.join(File.dirname(__FILE__), 'builder'))
 module SudokuBuilder
   class Solver < Sudoku
 
-    def initialize(sudoku)
+    def initialize(sudoku = nil)
       @sud = sudoku
-      @pristine = sudoku
       @used = {
         0=> [], 1=> [], 2=> [], 3=> [], 4=> [], 5=> [], 6=> [], 7=> [], 8=> [],
         9=> [], 10=>[], 11=>[], 12=>[], 13=>[], 14=>[], 15=>[], 16=>[], 17=>[],
@@ -20,82 +19,89 @@ module SudokuBuilder
       }
     end
 
+    def solver_pristine
+      @sud
+    end
+
     def solve
-      t = 0 ; o = 0 ;
-      direction = true ; key = 0          # main key variable.
-      loop do
-        if @sud[key].class == Array       # skips pre-filled numbers.
-          c = [] ; r = [] ; g = []        # build values for current grid, row, column.
-          build_crg(key,c,r,g,@sud)       # updates the relevant variables for check.
-          @sud[key] = []                  # makes a fresh possibilities array.
-          for i in 1..9
-            if check?(i, c,r,g) &&
-                !@used[key].include?(i)
-              @sud[key] << i
+      t = 0 ; o = 0 ; key = 0               # main key and metric vars.
+      direction = true                      # indicates the direction in case of a backtrack on number.
+      sud   = solver_pristine
+      used  = pristine
+      if sud.nil?
+        'Sudoku entered is not valid/
+         does not exist.'
+      else
+        loop do
+          if sud[key].class == Array        # skips pre-filled numbers.
+            c = [] ; r = [] ; g = []        # build values for current grid, row, column.
+            build_crg(key,c,r,g,sud)        # updates the relevant variables for check.
+            sud[key] = []                   # makes a fresh possibilities array.
+            for i in 1..9
+              if check?(i, c,r,g) &&
+                  !used[key].include?(i)
+                sud[key] << i
+              end
             end
+            if sud[key].count == 0          # backtrack if no possibilities.
+              key -= 1
+              direction = false             # setting backtrack to false sends the key down if the
+            else                            # next number down is a fixnum.
+              use = sud[key].sample         # pick a random possibility.
+              sud[key]   = [use]            # uses the possibility.
+              used[key] << use              # also puts it into the used array.
+              key += 1
+              direction = true
+            end
+          elsif sud[key].class == Fixnum
+            direction ? key += 1 : key -= 1 # backt or forward track based on current direction.
           end
-          if @sud[key].count == 0         # backtrack if no possibilities.
-            key -= 1
-            direction = false
-          else
-            use = @sud[key].sample        # pick a random possibility.
-            @sud[key]   = [use]           # uses the possibility.
-            @used[key] << use             # also puts it into the used array.
-            key += 1
+          if key == 0 || t > 104 ||
+                  key == 1 && t > 3         # resets everything if we've reached a high amount
+            sud = solver_pristine
+            used = pristine
+            key = 0 ; t = 0
             direction = true
           end
-        elsif @sud[key].class == Fixnum
-          direction ? key += 1 : key -= 1 # backt or forward track based on current direction.
+          break if key == 81                # break if we've reached the last value.
+          t += 1 ; o += 1                   # add the reporting variables.
+          break if o > 10000000             # there is the possibility to be given an unsolvable.
         end
-        if key == 0 || t > 104 ||
-                key == 1 && t > 3         # resets everything if we've reached a high amount
-          @sud = @pristine.dup            # of run throughs, or the key has wound down to 0.
-          @used.each do |k,v|
-            @used[k] = []
-          end
-          key = 0 ; t = 0
-          direction = true
-        end
-        break if key == 81                # break if we've reached the last value.
-        t += 1 ; o += 1                   # add the reporting variables
-        break if o > 10000000             # there is the possibility to be given an
+        Builder.new(@sud)
       end
-      Builder.new(@sud)
     end
 
     def create
-      t = 0 ; o = 0 ; key = 0           # main key and metric variables
+      sud = pristine
+      used = pristine
+      t = 0 ; o = 0 ; key = 0               # main key and metric variables
       loop do
-        c = [] ; r = [] ; g = []        # build values for current grid, row, column.
-        build_crg(key,c,r,g,@sud)       # updates the relevant variables for check.
-        @sud[key] = []                  # makes a fresh possibilities array.
+        c = [] ; r = [] ; g = []            # build values for current grid, row, column.
+        build_crg(key,c,r,g,sud)            # updates the relevant variables for check.
+        sud[key] = []                       # makes a fresh possibilities array.
         for i in 1..9
-          if check?(i, c,r,g) &&
-            !@used[key].include?(i)
-            @sud[key] << i
+          if check?(i,c,r,g) &&
+                !used[key].include?(i)
+            sud[key] << i
           end
         end
-        if @sud[key].count == 0         # backtrack if no possibilities.
+        if sud[key].count == 0              # backtrack if no possibilities.
           key -= 1
         else
-          use = @sud[key].sample        # pick a random possibility.
-          @sud[key]   = [use]           # uses the possibility.
-          @used[key] << use             # also puts it into the used array.
+          use = sud[key].sample             # pick a random possibility.
+          sud[key]   = [use]                # uses the possibility.
+          used[key] << use                  # also puts it into the used array.
           key += 1
         end
-        if key == 0 || t > 104          # resets everything if we've reached a high count.
-          @sud.each do |k,v|
-            @used[k] = []
-          end
-          @used.each do |k,v|
-            @used[k] = []
-          end
+        if key == 0 || t > 104              # resets everything if we've reached a high count.
+          sud = pristine
+          used = pristine
           key = 0 ; t = 0
         end
-        break if key == 81               # break if we've reached the last value.
-        t += 1 ; o += 1                  # add the reporting variables
+        break if key == 81                  # break if we've reached the last value.
+        t += 1 ; o += 1                     # add the reporting variables
       end
-      Builder.new(@sud)
+      Builder.new(sud)
     end
 
   end

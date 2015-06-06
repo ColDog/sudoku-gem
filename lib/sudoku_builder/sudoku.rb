@@ -26,5 +26,15 @@ module SudokuBuilder
     def check?(val,c,r,g)
       !c.flatten.include?(val) && !r.flatten.include?(val) && !g.flatten.include?(val)
     end
+
+    def pristine
+      sud = {} ; q = 0
+      81.times do
+        sud[q] = []
+        q += 1
+      end
+      sud
+    end
+
   end
 end

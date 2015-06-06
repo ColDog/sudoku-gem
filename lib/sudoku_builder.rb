@@ -6,12 +6,6 @@ require File.expand_path(File.join(File.dirname(__FILE__), 'sudoku_builder/versi
 module SudokuBuilder
   extend self
   def new
-    sudoku = { }
-    q = 0
-    81.times do
-      sudoku[q] = []
-      q += 1
-    end
-    Solver.new(sudoku).create
+    Solver.new.create
   end
 end
