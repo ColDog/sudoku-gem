@@ -64,7 +64,7 @@ describe SudokuBuilder do
     expect(new_sudoku.valid?).to eq(true)
   end
 
-  it 'creates a valid puzzle, checked differently' do
+  it 'creates a valid puzzle, validity checked differently' do
     sum = 0
     sudoku = SudokuBuilder.new.to_hash
     sudoku.each { |k,v| sum += v }
