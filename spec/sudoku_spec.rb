@@ -53,7 +53,7 @@ describe SudokuBuilder do
     expect(sudoku.valid?).to eq(true)
   end
 
-  it 'says an invalid puzzle is valid' do
+  it 'says an invalid puzzle is invalid' do
     expect(SudokuBuilder.new.poke(50).valid?).to eq(false)
   end
 

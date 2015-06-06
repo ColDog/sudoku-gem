@@ -55,6 +55,7 @@ my_puzzle must be equal to a hash with keys from 0 to 80 and values equal to an 
 	```
 	{0=>6, 1=>8, 2=>[], 3=>[], 4=>[], 5=>[], 6=>[3] ...
 	```
+This process may randomly get stuck sometimes, I'm not 100% sure why yet. Take a look and tell me what you think!
 
 ## Development
 
