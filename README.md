@@ -6,9 +6,10 @@ This is a sudoku builder that solves and builds sudoku puzzles!
 
 
 ```
-    $ gem install sudoku_builder`
+    $ gem install sudoku_builder
     $ irb
-    > require 'sudoku_builder' => true
+    > require 'sudoku_builder' 
+    > => true
     > SudokuBuilder.new.poke(50, '_').pretty_print
     >	+-----------------------------+
     >	| _  _  _ | _  _  _ | 6  4  _ |
@@ -43,7 +44,7 @@ Or install it yourself as:
 
 To create a new puzzle:
 
-`SudokuBuilder.new`
+    SudokuBuilder.new
 
 This will return a `SudokuBuilder::Builder` object that looks like this:
 
@@ -61,12 +62,12 @@ On the builder object you can call a handful of different methods:
 
 To solve an existing puzzle, call:
 
-	`SudokuBuilder::Solver.new(my_puzzle)`
+	SudokuBuilder::Solver.new(my_puzzle).solve
 
 `my_puzzle` must be equal to a hash with keys from 0 to 80 where the values are equal to an integer for already given squares and an array for empty squares. ie:
 
 ```
-	{0=>6, 1=>8, 2=>[], 3=>[], 4=>[], 5=>[], 6=>[3] ...
+{0=>6, 1=>8, 2=>[], 3=>[], 4=>[], 5=>[], 6=>[3] ...
 ```
 The builder then goes through guessing numbers for the arrays and leaving the numbers alone.
 
