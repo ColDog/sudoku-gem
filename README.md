@@ -4,9 +4,9 @@ This is a sudoku builder that solves and builds sudoku puzzles!
 
 #### Quick Start
 
-`gem install sudoku_builder`
 
 ```
+    $ gem install sudoku_builder`
     $ irb
     > require 'sudoku_builder' => true
     > SudokuBuilder.new.poke(50, '_').pretty_print
@@ -29,9 +29,7 @@ This is a sudoku builder that solves and builds sudoku puzzles!
 
 Add this line to your application's Gemfile:
 
-```ruby
-gem 'sudoku_builder'
-```
+    gem 'sudoku_builder'
 
 And then execute:
 
@@ -49,9 +47,9 @@ To create a new puzzle:
 
 This will return a `SudokuBuilder::Builder` object that looks like this:
 
-	```ruby
+```ruby
 	#<SudokuBuilder::Builder:0x007fdc729373e8 @sud={0=>[6], 1=>[8], 2=>[9], 3=>[5], 4=>[7], 5=>[2], 6=>[3], ...
-	```
+```
 
 On the builder object you can call a handful of different methods:
 
@@ -67,16 +65,11 @@ To solve an existing puzzle, call:
 
 `my_puzzle` must be equal to a hash with keys from 0 to 80 where the values are equal to an integer for already given squares and an array for empty squares. ie:
 
-	```
+```
 	{0=>6, 1=>8, 2=>[], 3=>[], 4=>[], 5=>[], 6=>[3] ...
-	```
+```
 The builder then goes through guessing numbers for the arrays and leaving the numbers alone.
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
