@@ -49,7 +49,7 @@ To create a new puzzle:
 This will return a `SudokuBuilder::Builder` object that looks like this:
 
 ```ruby
-	#<SudokuBuilder::Builder:0x007fdc729373e8 @sud={0=>[6], 1=>[8], 2=>[9], 3=>[5], 4=>[7], 5=>[2], 6=>[3], ...
+#<SudokuBuilder::Builder:0x007fdc729373e8 @sud={0=>[6], 1=>[8], 2=>[9], 3=>[5], 4=>[7], 5=>[2], 6=>[3], ...
 ```
 
 On the builder object you can call a handful of different methods:
@@ -66,9 +66,9 @@ To solve an existing puzzle, call:
 
 `my_puzzle` must be equal to a hash with keys from 0 to 80 where the values are equal to an integer for already given squares and an array for empty squares. ie:
 
-```
-{0=>6, 1=>8, 2=>[], 3=>[], 4=>[], 5=>[], 6=>[3] ...
-```
+
+    {0=>6, 1=>8, 2=>[], 3=>[], 4=>[], 5=>[] ...
+
 The builder then goes through guessing numbers for the arrays and leaving the numbers alone.
 
 
